@@ -1,0 +1,36 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+<!--配置spring-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring/spring-config.xml</param-value>
+  </context-param>
+
+  <!--配置mvc。可以有多个DispatcherServlet-->
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring/mvc-config.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/Information</url-pattern>
+  </servlet-mapping>
+</web-app>
+<!--注意DispatcherServlet-->
+<!--前端发请求到web.xml找到DispatcherServlet,根据servlet-mapping分发到control层，control作为中转zhan,
+
+  ModelandView ,MOdel存放业务数据,view为前端展示页面，回到DispatcherServlet,找到mvc的配置文件,根据视图解析器找到相关页面的位置，将数据填充-->
